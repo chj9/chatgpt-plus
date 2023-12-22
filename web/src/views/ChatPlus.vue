@@ -43,7 +43,7 @@
           <el-dropdown :hide-on-click="true" class="user-info" trigger="click" v-if="isLogin">
                         <span class="el-dropdown-link">
                           <el-image :src="loginUser.avatar"/>
-                          <span class="username">{{ '极客学长@' + loginUser.mobile }}</span>
+                          <span class="username">{{ '岸上吧@' + loginUser.mobile }}</span>
                           <el-icon><ArrowDown/></el-icon>
                         </span>
             <template #dropdown>
@@ -67,13 +67,13 @@
                   <span>注销</span>
                 </el-dropdown-item>
 
-                <el-dropdown-item>
-                  <i class="iconfont icon-github"></i>
-                  <span>
-                    powered by
-                    <el-link type="primary" href="https://github.com/yangjian102621/chatgpt-plus" target="_blank">chatgpt-plus-v3</el-link>
-                 </span>
-                </el-dropdown-item>
+<!--                <el-dropdown-item>-->
+<!--                  <i class="iconfont icon-github"></i>-->
+<!--                  <span>-->
+<!--                    powered by-->
+<!--                    <el-link type="primary" href="https://github.com/yangjian102621/chatgpt-plus" target="_blank">chatgpt-plus-v3</el-link>-->
+<!--                 </span>-->
+<!--                </el-dropdown-item>-->
               </el-dropdown-menu>
             </template>
           </el-dropdown>

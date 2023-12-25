@@ -128,7 +128,7 @@ import {setUserToken} from "@/store/session";
 import {checkSession} from "@/action/session";
 
 const router = useRouter();
-const title = ref('ChatPlus 用户注册');
+const title = ref('AI 创作系统用户注册');
 const formData = ref({
   mobile: '',
   password: '',

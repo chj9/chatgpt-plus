@@ -5,22 +5,21 @@ import (
 )
 
 type AppConfig struct {
-	Path          string `toml:"-"`
-	Listen        string
-	Session       Session
-	ProxyURL      string
-	MysqlDns      string            // mysql 连接地址
-	Manager       Manager           // 后台管理员账户信息
-	StaticDir     string            // 静态资源目录
-	StaticUrl     string            // 静态资源 URL
-	Redis         RedisConfig       // redis 连接信息
-	ApiConfig     ChatPlusApiConfig // ChatPlus API authorization configs
-	AesEncryptKey string
-	SmsConfig     AliYunSmsConfig         // AliYun send message service config
-	OSS           OSSConfig               // OSS config
-	MjConfigs     []MidJourneyConfig      // mj AI draw service pool
-	WeChatBot     bool                    // 是否启用微信机器人
-	SdConfigs     []StableDiffusionConfig // sd AI draw service pool
+	Path      string `toml:"-"`
+	Listen    string
+	Session   Session
+	ProxyURL  string
+	MysqlDns  string                  // mysql 连接地址
+	Manager   Manager                 // 后台管理员账户信息
+	StaticDir string                  // 静态资源目录
+	StaticUrl string                  // 静态资源 URL
+	Redis     RedisConfig             // redis 连接信息
+	ApiConfig ChatPlusApiConfig       // ChatPlus API authorization configs
+	SmsConfig AliYunSmsConfig         // AliYun send message service config
+	OSS       OSSConfig               // OSS config
+	MjConfigs []MidJourneyConfig      // mj AI draw service pool
+	WeChatBot bool                    // 是否启用微信机器人
+	SdConfigs []StableDiffusionConfig // sd AI draw service pool
 
 	XXLConfig     XXLConfig
 	AlipayConfig  AlipayConfig
@@ -34,11 +33,15 @@ type ChatPlusApiConfig struct {
 }
 
 type MidJourneyConfig struct {
-	Enabled   bool
-	UserToken string
-	BotToken  string
-	GuildId   string // Server ID
-	ChanelId  string // Chanel ID
+	Enabled        bool
+	UserToken      string
+	BotToken       string
+	GuildId        string // Server ID
+	ChanelId       string // Chanel ID
+	UseCDN         bool
+	DiscordAPI     string
+	DiscordCDN     string
+	DiscordGateway string
 }
 
 type StableDiffusionConfig struct {
@@ -155,7 +158,6 @@ type SystemConfig struct {
 	EnabledRegister  bool     `json:"enabled_register"`    // 是否启用注册功能，关闭注册功能之后将无法注册
 	EnabledMsg       bool     `json:"enabled_msg"`         // 是否启用短信验证码服务
 	RewardImg        string   `json:"reward_img"`          // 众筹收款二维码地址
-	EnabledFunction  bool     `json:"enabled_function"`    // 启用 API 函数功能
 	EnabledReward    bool     `json:"enabled_reward"`      // 启用众筹功能
 	EnabledAlipay    bool     `json:"enabled_alipay"`      // 是否启用支付宝支付通道
 	OrderPayTimeout  int      `json:"order_pay_timeout"`   //订单支付超时时间

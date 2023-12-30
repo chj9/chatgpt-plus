@@ -8,7 +8,6 @@ import (
 	"chatplus/handler/chatimpl"
 	logger2 "chatplus/logger"
 	"chatplus/service"
-	"chatplus/service/fun"
 	"chatplus/service/mj"
 	"chatplus/service/oss"
 	"chatplus/service/payment"
@@ -115,9 +114,6 @@ func main() {
 			return xdb.NewWithBuffer(cBuff)
 		}),
 
-		// 创建函数
-		fx.Provide(fun.NewFunctions),
-
 		// 创建控制器
 		fx.Provide(handler.NewChatRoleHandler),
 		fx.Provide(handler.NewUserHandler),
@@ -168,6 +164,7 @@ func main() {
 		fx.Invoke(func(pool *mj.ServicePool) {
 			if pool.HasAvailableService() {
 				pool.DownloadImages()
+				pool.CheckTaskNotify()
 			}
 		}),
 
@@ -234,6 +231,7 @@ func main() {
 		}),
 		fx.Invoke(func(s *core.AppServer, h *handler.MidJourneyHandler) {
 			group := s.Engine.Group("/api/mj/")
+			group.Any("client", h.Client)
 			group.POST("image", h.Image)
 			group.POST("upscale", h.Upscale)
 			group.POST("variation", h.Variation)
@@ -350,8 +348,18 @@ func main() {
 		fx.Invoke(func(s *core.AppServer, h *admin.FunctionHandler) {
 			group := s.Engine.Group("/api/admin/function/")
 			group.POST("save", h.Save)
+			group.POST("set", h.Set)
 			group.GET("list", h.List)
 			group.GET("remove", h.Remove)
+			group.GET("token", h.GenToken)
+		}),
+
+		fx.Provide(handler.NewFunctionHandler),
+		fx.Invoke(func(s *core.AppServer, h *handler.FunctionHandler) {
+			group := s.Engine.Group("/api/function/")
+			group.POST("weibo", h.WeiBo)
+			group.POST("zaobao", h.ZaoBao)
+			group.POST("dalle3", h.Dall3)
 		}),
 
 		fx.Provide(handler.NewTestHandler),

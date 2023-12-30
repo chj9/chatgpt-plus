@@ -56,19 +56,6 @@
             </el-icon>
           </el-tooltip>
         </el-form-item>
-        <el-form-item label="启用函数功能" prop="enabled_function">
-          <el-switch v-model="system['enabled_function']"/>
-          <el-tooltip
-              effect="dark"
-              content="是否在AI对话时启用函数功能"
-              raw-content
-              placement="right"
-          >
-            <el-icon>
-              <InfoFilled/>
-            </el-icon>
-          </el-tooltip>
-        </el-form-item>
 
         <el-form-item label="启用众筹功能" prop="enabled_reward">
           <el-switch v-model="system['enabled_reward']"/>
@@ -373,7 +360,7 @@ const uploadRewardImg = (file) => {
 </script>
 
 <style lang="stylus" scoped>
-@import "@/assets/css/admin-form.styl"
+@import "@/assets/css/admin/form.styl"
 .system-config {
   display flex
   justify-content center

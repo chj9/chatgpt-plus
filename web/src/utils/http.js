@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {getAdminToken, getSessionId, getUserToken} from "@/store/session";
+import {ElMessage} from "element-plus";
 
 axios.defaults.timeout = 30000
 axios.defaults.baseURL = process.env.VUE_APP_API_HOST
@@ -50,7 +51,11 @@ export function httpPost(url, data = {}, options = {}) {
         axios.post(url, data, options).then(response => {
             resolve(response.data)
         }).catch(err => {
-            reject(err)
+            if (err.response.status == 400) {
+                reject(err.response.data)
+            }else {
+                reject(err)
+            }
         })
     })
 }
